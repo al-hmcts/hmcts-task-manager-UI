@@ -7,12 +7,21 @@
 
   <h1 class="govuk-heading-xl">All Tasks</h1>
 
+  <div class="govuk-!-margin-bottom-6">
+    {{ govukButton({
+      text: "Add Task",
+      href: "/add-task"
+    }) }}
+  </div>
+
   <section class="task-list">
-    {% for item in items %}
-      {{ taskCard(item.title, item.description, item.dueDate) }}
-    {% endfor %}
+    {% if items.length %}
+      {% for item in items %}
+        {{ taskCard(item) }}
+      {% endfor %}
+    {% else %}
+      <p class="govuk-body">No tasks available.</p>
+    {% endif %}
   </section>
 
-
 {% endblock %}
-

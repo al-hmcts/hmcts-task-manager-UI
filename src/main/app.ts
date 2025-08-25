@@ -37,11 +37,15 @@ glob
 setupDev(app, developmentMode);
 
 // error handler
-app.use((err: HTTPError, req: express.Request, res: express.Response) => {
-  console.log(err);
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = env === 'development' ? err : {};
-  res.status(err.status || 500);
-  res.render('error');
-});
+app.use(
+  (err: HTTPError | any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error(err); // log for debugging
+
+    const message = err?.message || 'Something went wrong';
+    const status = err?.status || 500;
+
+    res.locals.message = message;
+    res.locals.error = env === 'development' ? err : {};
+    res.status(status).render('error');
+  }
+);
