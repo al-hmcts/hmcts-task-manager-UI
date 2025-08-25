@@ -1,12 +1,16 @@
+import { statusEnum } from "../../models/statusEnum";
+
 export class TaskRequest {
   public title: string;
   public description: string;
+  public status: statusEnum; 
   public due_date: string;
 
-  constructor(title: string, description: string, due_date: string) {
+  constructor(title: string, description: string, status: statusEnum, due_date: string) {
     this.title = title;
     this.description = description;
     this.due_date = due_date;
+    this.status = status;
   }
 
   static fromForm(form: any): TaskRequest {
@@ -22,7 +26,7 @@ export class TaskRequest {
 
     console.log("TaskRequest.fromForm:", {title, description, dueDate});
 
-    return new TaskRequest(title, description, dueDate || '');
+    return new TaskRequest(title, description, statusEnum.IN_PROGRESS ,dueDate || '');
   }
 }
 

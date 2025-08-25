@@ -1,3 +1,4 @@
+
 import { TaskResponse } from '../responses/TaskResponse';
 
 export class TaskItem {
@@ -6,6 +7,7 @@ export class TaskItem {
     public title: string,
     public description: string,
     public dueDate: string, 
+    public status: string,
     public createdDate: string,   
     public dueDateParts: { day: string; month: string; year: string } // For form inputs
   ) {}
@@ -38,6 +40,7 @@ export class TaskItem {
       task.title || 'Untitled',
       task.description,
       dueDate, 
+      task.status,
       createdDate,
       dueDateParts
     );
