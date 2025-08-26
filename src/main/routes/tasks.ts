@@ -17,16 +17,22 @@ export default function (app: Application): void {
 
   // Add form (GET)
   app.get('/add-task', (req, res) => {
-    res.render('add-task');
+    res.render('add-task', { task: {},  errors: [] });
   });
 
   // Add form (POST)
   app.post('/add-task', async (req, res, next) => {
     try {
       const taskRequest = TaskRequest.fromForm(req.body);
-      console.log(taskRequest);
+
+      if (taskRequest.hasErrors()) {
+        return res.status(400).render('add-task', {
+          task: req.body,
+          errors: taskRequest.errors
+        });
+      }
+
       await apiClient.createTask(taskRequest);
-  
       res.redirect('/tasks');
     } catch (err) {
       next(err);
@@ -36,9 +42,8 @@ export default function (app: Application): void {
   // Edit form (GET)
   app.get('/tasks/:id/edit', async (req, res, next) => {
     try {
-      const task = await apiClient.fetchTaskById(Number(req.params.id));// returns TaskItem
-      console.log(task);
-      res.render('add-task', { task });
+      const task = await apiClient.fetchTaskById(Number(req.params.id));
+      res.render('add-task', { task, errors: [] });
     } catch (err) {
       next(err);
     }
@@ -48,6 +53,14 @@ export default function (app: Application): void {
   app.post('/tasks/:id/edit', async (req, res, next) => {
     try {
       const taskRequest = TaskRequest.fromForm(req.body);
+
+      if (taskRequest.hasErrors()) {
+        return res.status(400).render('add-task', {
+          task: { ...req.body, id: req.params.id },
+          errors: taskRequest.errors
+        });
+      }
+
       await apiClient.updateTask(Number(req.params.id), taskRequest);
       res.redirect('/tasks');
     } catch (err) {

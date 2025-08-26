@@ -28,7 +28,6 @@ export class TaskItem {
       year: 'numeric'
     });
     
-
     const createdDate = new Date(task.created_date).toLocaleDateString('en-GB', {
       day: '2-digit',
       month: '2-digit',

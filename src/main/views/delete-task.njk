@@ -24,6 +24,10 @@
       <dt class="govuk-summary-list__key">Created date</dt>
       <dd class="govuk-summary-list__value">{{ task.createdDate }}</dd>
     </div>
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">Status</dt>
+      <dd class="govuk-summary-list__value">{{ task.status }}</dd>
+    </div>
   </dl>
 
   <form method="post" action="/tasks/{{ task.id }}/delete">
