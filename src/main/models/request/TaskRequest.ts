@@ -14,7 +14,7 @@ export class TaskRequest {
   }
 
   static fromForm(form: any): TaskRequest {
-    const { title, description } = form;
+    const { title, description, status } = form;
     const day = form['dueDate-day'];
     const month = form['dueDate-month'];
     const year = form['dueDate-year'];
@@ -24,9 +24,9 @@ export class TaskRequest {
       dueDate = `${year}-${month.padStart(2,'0')}-${day.padStart(2,'0')}T00:00:00`;
     }
 
-    console.log("TaskRequest.fromForm:", {title, description, dueDate});
+    console.log("TaskRequest.fromForm:", {title, description, dueDate, status});
 
-    return new TaskRequest(title, description, statusEnum.IN_PROGRESS ,dueDate || '');
+    return new TaskRequest(title, description, status, dueDate || '');
   }
 }
 

@@ -49,16 +49,18 @@
       items: [
         {
           value: "pending",
-          text: "Pending"
+          text: "Pending",
+          selected: task.status == "pending"
         },
         {
-          value: "in_progress",
+          value: "in progress",
           text: "In Progress",
-          selected: true
+          selected: task.status == "in progress"
         },
         {
           value: "completed",
-          text: "Completed"
+          text: "Completed",
+          selected: task.status == "completed"
         }
       ]
     }) }}
