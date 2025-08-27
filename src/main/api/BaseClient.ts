@@ -4,7 +4,9 @@ import { ApiError } from '../models/errors/ApiError';
 export abstract class BaseClient {
   protected client: AxiosInstance;
 
-  constructor(baseURL: string) {
+  protected readonly TOKEN_KEY = "hmcts.session.token";
+
+  constructor(baseURL: string, token?: string) {
     this.client = axios.create({
       baseURL,
       timeout: 5000,
@@ -17,6 +19,14 @@ export abstract class BaseClient {
         return Promise.reject(this.formatError(err, 'API request failed'));
       }
     );
+
+    this.client.interceptors.request.use((config: any) => {
+        if (token) {
+          config.headers = config.headers ?? {};
+          config.headers["Authorization"] = `Bearer ${token}`;
+        }
+        return config;
+      });
   }
 
   protected formatError(error: any, message: string): ApiError {

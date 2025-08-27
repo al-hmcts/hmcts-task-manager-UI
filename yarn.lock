@@ -3694,6 +3694,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/express-session@npm:^1.18.2":
+  version: 1.18.2
+  resolution: "@types/express-session@npm:1.18.2"
+  dependencies:
+    "@types/express": "*"
+  checksum: 317b749c2179f8d6b5b961e9da3deb8c730c06586cfbf92391c9f74c7981825bfa1b37942e7fe85e51a85c678809b614b2405c722c3474d4afd98686ee04d0ad
+  languageName: node
+  linkType: hard
+
 "@types/express@npm:*, @types/express@npm:^4.17.17":
   version: 4.17.21
   resolution: "@types/express@npm:4.17.21"
@@ -6399,6 +6408,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cookie-signature@npm:1.0.7":
+  version: 1.0.7
+  resolution: "cookie-signature@npm:1.0.7"
+  checksum: 1a62808cd30d15fb43b70e19829b64d04b0802d8ef00275b57d152de4ae6a3208ca05c197b6668d104c4d9de389e53ccc2d3bc6bcaaffd9602461417d8c40710
+  languageName: node
+  linkType: hard
+
 "cookie@npm:0.4.0":
   version: 0.4.0
   resolution: "cookie@npm:0.4.0"
@@ -6417,6 +6433,13 @@ __metadata:
   version: 0.6.0
   resolution: "cookie@npm:0.6.0"
   checksum: f56a7d32a07db5458e79c726b77e3c2eff655c36792f2b6c58d351fb5f61531e5b1ab7f46987150136e366c65213cbe31729e02a3eaed630c3bf7334635fb410
+  languageName: node
+  linkType: hard
+
+"cookie@npm:0.7.2":
+  version: 0.7.2
+  resolution: "cookie@npm:0.7.2"
+  checksum: 9bf8555e33530affd571ea37b615ccad9b9a34febbf2c950c86787088eb00a8973690833b0f8ebd6b69b753c62669ea60cec89178c1fb007bf0749abed74f93e
   languageName: node
   linkType: hard
 
@@ -6890,7 +6913,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"depd@npm:2.0.0":
+"depd@npm:2.0.0, depd@npm:~2.0.0":
   version: 2.0.0
   resolution: "depd@npm:2.0.0"
   checksum: abbe19c768c97ee2eed6282d8ce3031126662252c58d711f646921c9623f9052e3e1906443066beec1095832f534e57c523b7333f8e7e0d93051ab6baef5ab3a
@@ -7866,6 +7889,22 @@ __metadata:
     express: ^4.19.2
     nunjucks: ^3.2.4
   checksum: cccec33d2644032cf806907ea0764a67e829773e5baf69d70d754fd776782952f7935d63419433fe402365ae79e2fba6a5547264463f6e1b054b9732e7f6a63e
+  languageName: node
+  linkType: hard
+
+"express-session@npm:^1.18.2":
+  version: 1.18.2
+  resolution: "express-session@npm:1.18.2"
+  dependencies:
+    cookie: 0.7.2
+    cookie-signature: 1.0.7
+    debug: 2.6.9
+    depd: ~2.0.0
+    on-headers: ~1.1.0
+    parseurl: ~1.3.3
+    safe-buffer: 5.2.1
+    uid-safe: ~2.1.5
+  checksum: 3d72db9e2eef4b399eaccb48522f604f0218aade82c2cd59e3c6cb6a6957a4e2f7d8b0039aab260c714908d596f81c4f2422ec11d856f2d2c639cdeca7d114f9
   languageName: node
   linkType: hard
 
@@ -8987,6 +9026,7 @@ __metadata:
     "@types/csurf": ^1.11.2
     "@types/es6-promisify": ^6.0.1
     "@types/express": ^4.17.17
+    "@types/express-session": ^1.18.2
     "@types/glob": ^8.1.0
     "@types/jest": ^29.5.4
     "@types/lodash": ^4.14.197
@@ -9018,6 +9058,7 @@ __metadata:
     eslint-plugin-jest: ^28.0.0
     express: ^4.18.2
     express-nunjucks: ^3.1.1
+    express-session: ^1.18.2
     glob: ^10.3.3
     govuk-frontend: 4.8.0
     html-webpack-plugin: ^5.5.3
@@ -12057,6 +12098,13 @@ __metadata:
   dependencies:
     ee-first: 1.1.1
   checksum: d20929a25e7f0bb62f937a425b5edeb4e4cde0540d77ba146ec9357f00b0d497cdb3b9b05b9c8e46222407d1548d08166bff69cc56dfa55ba0e4469228920ff0
+  languageName: node
+  linkType: hard
+
+"on-headers@npm:~1.1.0":
+  version: 1.1.0
+  resolution: "on-headers@npm:1.1.0"
+  checksum: 98aa64629f986fb8cc4517dd8bede73c980e31208cba97f4442c330959f60ced3dc6214b83420491f5111fc7c4f4343abe2ea62c85f505cf041d67850f238776
   languageName: node
   linkType: hard
 
@@ -15214,7 +15262,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uid-safe@npm:2.1.5":
+"uid-safe@npm:2.1.5, uid-safe@npm:~2.1.5":
   version: 2.1.5
   resolution: "uid-safe@npm:2.1.5"
   dependencies:

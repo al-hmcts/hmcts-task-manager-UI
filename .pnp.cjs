@@ -43,6 +43,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/csurf", "npm:1.11.5"],\
             ["@types/es6-promisify", "npm:6.0.4"],\
             ["@types/express", "npm:4.17.21"],\
+            ["@types/express-session", "npm:1.18.2"],\
             ["@types/glob", "npm:8.1.0"],\
             ["@types/jest", "npm:29.5.12"],\
             ["@types/lodash", "npm:4.17.5"],\
@@ -74,6 +75,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-jest", "virtual:3a02cceef93055271d0890b855d0c93a770c9c876ee9b808cf9e23d8d1b8581b5b6efcfb80a9768d650dfa22f93777eca81ae9ef4de2301b22a7619649eb692a#npm:28.6.0"],\
             ["express", "npm:4.19.2"],\
             ["express-nunjucks", "virtual:3a02cceef93055271d0890b855d0c93a770c9c876ee9b808cf9e23d8d1b8581b5b6efcfb80a9768d650dfa22f93777eca81ae9ef4de2301b22a7619649eb692a#npm:3.1.2"],\
+            ["express-session", "npm:1.18.2"],\
             ["glob", "npm:10.4.1"],\
             ["govuk-frontend", "npm:4.8.0"],\
             ["html-webpack-plugin", "virtual:3a02cceef93055271d0890b855d0c93a770c9c876ee9b808cf9e23d8d1b8581b5b6efcfb80a9768d650dfa22f93777eca81ae9ef4de2301b22a7619649eb692a#npm:5.6.0"],\
@@ -5721,6 +5723,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["@types/express-session", [\
+        ["npm:1.18.2", {\
+          "packageLocation": "./.yarn/cache/@types-express-session-npm-1.18.2-8d3c6f2e85-317b749c21.zip/node_modules/@types/express-session/",\
+          "packageDependencies": [\
+            ["@types/express-session", "npm:1.18.2"],\
+            ["@types/express", "npm:4.17.21"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["@types/glob", [\
         ["npm:8.1.0", {\
           "packageLocation": "./.yarn/cache/@types-glob-npm-8.1.0-bdb9d0520c-9101f3a906.zip/node_modules/@types/glob/",\
@@ -9082,6 +9094,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["cookie", "npm:0.6.0"]\
           ],\
           "linkType": "HARD"\
+        }],\
+        ["npm:0.7.2", {\
+          "packageLocation": "./.yarn/cache/cookie-npm-0.7.2-6ea9ee4231-9bf8555e33.zip/node_modules/cookie/",\
+          "packageDependencies": [\
+            ["cookie", "npm:0.7.2"]\
+          ],\
+          "linkType": "HARD"\
         }]\
       ]],\
       ["cookie-parser", [\
@@ -9100,6 +9119,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/cookie-signature-npm-1.0.6-93f325f7f0-f4e1b0a98a.zip/node_modules/cookie-signature/",\
           "packageDependencies": [\
             ["cookie-signature", "npm:1.0.6"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:1.0.7", {\
+          "packageLocation": "./.yarn/cache/cookie-signature-npm-1.0.7-a115603de6-1a62808cd3.zip/node_modules/cookie-signature/",\
+          "packageDependencies": [\
+            ["cookie-signature", "npm:1.0.7"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -10917,6 +10943,23 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["express-session", [\
+        ["npm:1.18.2", {\
+          "packageLocation": "./.yarn/cache/express-session-npm-1.18.2-1fdf1a09db-3d72db9e2e.zip/node_modules/express-session/",\
+          "packageDependencies": [\
+            ["express-session", "npm:1.18.2"],\
+            ["cookie", "npm:0.7.2"],\
+            ["cookie-signature", "npm:1.0.7"],\
+            ["debug", "virtual:44738662cf800ff2863ba9baeabb817b24a959a14f86e20a31680e5dc79a4a738f7ceb7dca32753d579fae475aa061dffad8228a3391f3a9546b122f077e29a5#npm:2.6.9"],\
+            ["depd", "npm:2.0.0"],\
+            ["on-headers", "npm:1.1.0"],\
+            ["parseurl", "npm:1.3.3"],\
+            ["safe-buffer", "npm:5.2.1"],\
+            ["uid-safe", "npm:2.1.5"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["extend", [\
         ["npm:3.0.2", {\
           "packageLocation": "./.yarn/cache/extend-npm-3.0.2-e1ca07ac54-a50a8309ca.zip/node_modules/extend/",\
@@ -12096,6 +12139,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/csurf", "npm:1.11.5"],\
             ["@types/es6-promisify", "npm:6.0.4"],\
             ["@types/express", "npm:4.17.21"],\
+            ["@types/express-session", "npm:1.18.2"],\
             ["@types/glob", "npm:8.1.0"],\
             ["@types/jest", "npm:29.5.12"],\
             ["@types/lodash", "npm:4.17.5"],\
@@ -12127,6 +12171,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-jest", "virtual:3a02cceef93055271d0890b855d0c93a770c9c876ee9b808cf9e23d8d1b8581b5b6efcfb80a9768d650dfa22f93777eca81ae9ef4de2301b22a7619649eb692a#npm:28.6.0"],\
             ["express", "npm:4.19.2"],\
             ["express-nunjucks", "virtual:3a02cceef93055271d0890b855d0c93a770c9c876ee9b808cf9e23d8d1b8581b5b6efcfb80a9768d650dfa22f93777eca81ae9ef4de2301b22a7619649eb692a#npm:3.1.2"],\
+            ["express-session", "npm:1.18.2"],\
             ["glob", "npm:10.4.1"],\
             ["govuk-frontend", "npm:4.8.0"],\
             ["html-webpack-plugin", "virtual:3a02cceef93055271d0890b855d0c93a770c9c876ee9b808cf9e23d8d1b8581b5b6efcfb80a9768d650dfa22f93777eca81ae9ef4de2301b22a7619649eb692a#npm:5.6.0"],\
@@ -15566,6 +15611,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["on-finished", "npm:2.4.1"],\
             ["ee-first", "npm:1.1.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["on-headers", [\
+        ["npm:1.1.0", {\
+          "packageLocation": "./.yarn/cache/on-headers-npm-1.1.0-7d18779060-98aa64629f.zip/node_modules/on-headers/",\
+          "packageDependencies": [\
+            ["on-headers", "npm:1.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\

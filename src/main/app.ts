@@ -6,6 +6,7 @@ import { Nunjucks } from './modules/nunjucks';
 import * as bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import session from "express-session";
 import { glob } from 'glob';
 import favicon from 'serve-favicon';
 
@@ -28,6 +29,11 @@ app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
   next();
 });
+app.use(session({
+  secret: process.env.SESSION_SECRET ?? "dev-secret",
+  resave: false,
+  saveUninitialized: false,
+}));
 
 glob
   .sync(__dirname + '/routes/**/*.+(ts|js)')

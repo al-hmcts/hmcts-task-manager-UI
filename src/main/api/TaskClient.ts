@@ -1,7 +1,7 @@
 import { BaseClient } from './BaseClient';
 import { TaskResponse } from '../models/responses/TaskResponse';
 import { TaskItem } from '../models/view/task-item';
-import { ENDPOINTS } from './endpoits';
+import { ENDPOINTS } from './endpoints';
 import { TaskRequest } from '../models/request/TaskRequest';
 
 export class TaskClient extends BaseClient {

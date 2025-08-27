@@ -3,10 +3,15 @@ import { TaskClient } from '../api/TaskClient';
 import { TaskRequest } from '../models/request/TaskRequest';
 
 export default function (app: Application): void {
+  const token = (req.session as any).authToken;
   const apiClient = new TaskClient(process.env.API_URL || 'http://localhost:4000');
 
   // View all tasks
   app.get('/tasks', async (req, res, next) => {
+    
+    if (!token) {
+      return res.redirect("/"); // not logged in
+    }
     try {
       const tasks = await apiClient.fetchTasks();
       res.render('all-tasks', { items: tasks });
