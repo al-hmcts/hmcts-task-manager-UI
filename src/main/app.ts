@@ -9,6 +9,7 @@ import express from 'express';
 import session from "express-session";
 import { glob } from 'glob';
 import favicon from 'serve-favicon';
+import { attachClients } from './middleware/attachClients';
 
 const { setupDev } = require('./development');
 
@@ -34,6 +35,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
+app.use(attachClients(process.env.API_URL || "http://localhost:4000"));
 
 glob
   .sync(__dirname + '/routes/**/*.+(ts|js)')

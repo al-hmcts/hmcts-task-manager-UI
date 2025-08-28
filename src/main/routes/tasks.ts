@@ -1,93 +1,110 @@
-import { Application } from 'express';
-import { TaskClient } from '../api/TaskClient';
-import { TaskRequest } from '../models/request/TaskRequest';
+// src/main/routes/tasks.ts
+import { Application, Request, Response, NextFunction } from "express";
+import { TaskRequest } from "../models/request/TaskRequest";
+
+// Retrieve task client setup from middleware
+function getTaskClient(req: Request) {
+  return (req as any).clients?.tasks;
+}
+
+// Auth gate for routes that require a session token
+function requireAuth(req: Request, res: Response, next: NextFunction) {
+  const token = (req.session as any).authToken;
+  if (!token) {
+    return res.redirect("/"); // not logged in → go to login/home
+  }
+  next();
+}
 
 export default function (app: Application): void {
-  const token = (req.session as any).authToken;
-  const apiClient = new TaskClient(process.env.API_URL || 'http://localhost:4000');
-
   // View all tasks
-  app.get('/tasks', async (req, res, next) => {
-    
-    if (!token) {
-      return res.redirect("/"); // not logged in
-    }
+  app.get("/tasks", requireAuth, async (req, res, next) => {
     try {
-      const tasks = await apiClient.fetchTasks();
-      res.render('all-tasks', { items: tasks });
+      const taskClient = getTaskClient(req);
+      const tasks = await taskClient.fetchTasks();
+      res.render("all-tasks", { items: tasks });
     } catch (err) {
-      next(err); 
+      next(err);
     }
   });
 
   // Add form (GET)
-  app.get('/add-task', (req, res) => {
-    res.render('add-task', { task: {},  errors: [] });
+  app.get("/add-task", requireAuth, (req, res) => {
+    res.render("add-task", { task: {}, errors: [] });
   });
 
   // Add form (POST)
-  app.post('/add-task', async (req, res, next) => {
+  app.post("/add-task", requireAuth, async (req, res, next) => {
     try {
       const taskRequest = TaskRequest.fromForm(req.body);
 
       if (taskRequest.hasErrors()) {
-        return res.status(400).render('add-task', {
+        return res.status(400).render("add-task", {
           task: req.body,
-          errors: taskRequest.errors
+          errors: taskRequest.errors,
         });
       }
 
-      await apiClient.createTask(taskRequest);
-      res.redirect('/tasks');
+      const taskClient = getTaskClient(req);
+      await taskClient.createTask(taskRequest);
+      res.redirect("/tasks");
     } catch (err) {
       next(err);
     }
   });
 
   // Edit form (GET)
-  app.get('/tasks/:id/edit', async (req, res, next) => {
+  app.get("/tasks/:id/edit", requireAuth, async (req, res, next) => {
     try {
-      const task = await apiClient.fetchTaskById(Number(req.params.id));
-      res.render('add-task', { task, errors: [] });
+      const id = Number(req.params.id);
+      const taskClient = getTaskClient(req);
+      const task = await taskClient.fetchTaskById(id);
+      res.render("add-task", { task, errors: [] });
     } catch (err) {
       next(err);
     }
   });
 
   // Edit form (POST)
-  app.post('/tasks/:id/edit', async (req, res, next) => {
+  app.post("/tasks/:id/edit", requireAuth, async (req, res, next) => {
     try {
+      const id = Number(req.params.id);
       const taskRequest = TaskRequest.fromForm(req.body);
 
       if (taskRequest.hasErrors()) {
-        return res.status(400).render('add-task', {
-          task: { ...req.body, id: req.params.id },
-          errors: taskRequest.errors
+        return res.status(400).render("add-task", {
+          task: { ...req.body, id },
+          errors: taskRequest.errors,
         });
       }
 
-      await apiClient.updateTask(Number(req.params.id), taskRequest);
-      res.redirect('/tasks');
+      const taskClient = getTaskClient(req);
+      await taskClient.updateTask(id, taskRequest);
+      res.redirect("/tasks");
     } catch (err) {
       next(err);
     }
   });
 
   // Delete confirmation page (GET)
-  app.get('/tasks/:id/delete', async (req, res, next) => {
+  app.get("/tasks/:id/delete", requireAuth, async (req, res, next) => {
     try {
-      const task = await apiClient.fetchTaskById(Number(req.params.id));
-      res.render('delete-task', { task });
+      const id = Number(req.params.id);
+      const taskClient = getTaskClient(req);
+      const task = await taskClient.fetchTaskById(id);
+      res.render("delete-task", { task });
     } catch (err) {
       next(err);
     }
   });
 
   // Delete (POST)
-  app.post('/tasks/:id/delete', async (req, res, next) => {
+  app.post("/tasks/:id/delete", requireAuth, async (req, res, next) => {
     try {
-      await apiClient.deleteTask(Number(req.params.id));
-      res.redirect('/tasks');
+      const id = Number(req.params.id);
+      const taskClient = getTaskClient(req);
+      await taskClient.deleteTask(id);
+      res.redirect("/tasks");
     } catch (err) {
       next(err);
     }

@@ -24,15 +24,6 @@
 
   {% set errorList = [] %}
 
-  {# {% if errors %}
-    {% for err in errors %}
-      <script> console.log("Error field:", "{{ err.field }}", "Message:", "{{ err.message }}"); </script>
-        {% set text = err.message or err.text or "Unknown error" %}
-        {% set href = "#" ~ err.field %}
-        {% set errorList = errorList + [{ text: text, href: href }] %}
-    {% endfor %}
-  {% endif %} #}
-
   {% if errors | length %}
     {{ govukErrorSummary({
       titleText: "There is a problem",
