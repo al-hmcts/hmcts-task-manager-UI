@@ -1,7 +1,12 @@
-import { expect, test } from '@playwright/test';
+import { expect, Page, test } from '@playwright/test';
+import dotenv from 'dotenv';
 
-async function login(page) {
-  await page.goto('https://localhost:3100/');
+// Load environment variables from .env file
+dotenv.config();
+
+async function login(page: Page) {
+  console.log(`Logging in to ${process.env.TASK_FRONTEND}/`);
+  await page.goto(`${process.env.TASK_FRONTEND}/`);
 
   const username = page.getByRole('textbox', { name: 'Username' });
   const password = page.getByRole('textbox', { name: 'Password' });
@@ -12,7 +17,7 @@ async function login(page) {
 }
 
 test('Route to login page if not logged in', async ({ page }) => {
-  await page.goto('https://localhost:3100/tasks');
+  await page.goto(`${process.env.TASK_FRONTEND}/tasks`);
 
   const signInHeading = page.getByRole('heading', { name: 'Sign in' });
 
