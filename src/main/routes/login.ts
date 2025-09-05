@@ -20,7 +20,7 @@ export default function (app: Application): void {
        // store in session
        (req.session as any).authToken = token;
 
-       // 👇 redirect the browser to /tasks
+       // redirect the browser to /tasks
        res.redirect("/tasks");
     } catch (error) {
       console.error('Error making request:', error);

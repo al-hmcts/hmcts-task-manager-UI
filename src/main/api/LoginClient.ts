@@ -1,4 +1,3 @@
-// src/main/api/LoginClient.ts
 import { LoginRequest } from "../models/request/LoginRequest";
 import { BaseClient } from "./BaseClient";
 import { LoginResponse } from "../models/responses/LoginResponse";
