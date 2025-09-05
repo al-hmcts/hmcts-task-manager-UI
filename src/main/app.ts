@@ -6,8 +6,10 @@ import { Nunjucks } from './modules/nunjucks';
 import * as bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import session from "express-session";
 import { glob } from 'glob';
 import favicon from 'serve-favicon';
+import { attachClients } from './middleware/attachClients';
 
 const { setupDev } = require('./development');
 
@@ -28,6 +30,12 @@ app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache, max-age=0, must-revalidate, no-store');
   next();
 });
+app.use(session({
+  secret: process.env.SESSION_SECRET ?? "dev-secret",
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(attachClients(process.env.API_URL || "http://localhost:4000"));
 
 glob
   .sync(__dirname + '/routes/**/*.+(ts|js)')
@@ -37,11 +45,15 @@ glob
 setupDev(app, developmentMode);
 
 // error handler
-app.use((err: HTTPError, req: express.Request, res: express.Response) => {
-  console.log(err);
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = env === 'development' ? err : {};
-  res.status(err.status || 500);
-  res.render('error');
-});
+app.use(
+  (err: HTTPError | any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.error(err); // log for debugging
+
+    const message = err?.message || 'Something went wrong';
+    const status = err?.status || 500;
+
+    res.locals.message = message;
+    res.locals.error = env === 'development' ? err : {};
+    res.status(status).render('error');
+  }
+);

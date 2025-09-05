@@ -1,0 +1,31 @@
+{% extends "template.njk" %}
+
+{% from "govuk/components/input/macro.njk"   import govukInput %}
+{% from "govuk/components/button/macro.njk"  import govukButton %}
+
+{% block content %}
+
+  <h1 class="govuk-heading-xl">Sign in</h1>
+
+  <form method="post" action="/login" novalidate>
+
+    {{ govukInput({
+      id: "username",
+      name: "username",
+      label: { text: "Username" },
+      classes: "govuk-!-width-two-thirds",
+      value: form and form.username or ""
+    }) }}
+
+    {{ govukInput({
+      id: "password",
+      name: "password",
+      type: "password",
+      label: { text: "Password" },
+      classes: "govuk-!-width-two-thirds"
+    }) }}
+
+    {{ govukButton({ text: "Sign in" }) }}
+  </form>
+
+{% endblock %}

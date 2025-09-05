@@ -1,0 +1,105 @@
+{% extends "template.njk" %}
+
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/textarea/macro.njk" import govukTextarea %}
+{% from "govuk/components/date-input/macro.njk" import govukDateInput %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
+{% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
+
+{% block content %}
+
+  {# Determine Add or Edit mode #}
+  {% if task.id %}
+    {% set pageTitle = "Edit Task" %}
+    {% set formAction = '/tasks/' ~ task.id ~ '/edit' %}  {# matches POST route #}
+    {% set buttonText = "Update Task" %}
+  {% else %}
+    {% set pageTitle = "Add a new task" %}
+    {% set formAction = '/add-task' %}         {# add #}
+    {% set buttonText = "Save Task" %}
+  {% endif %}
+
+  <h1 class="govuk-heading-xl">{{ pageTitle }}</h1>
+
+  {% set errorList = [] %}
+
+  {% if errors | length %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: errors
+    }) }}
+  {% endif %}
+
+  <form method="post" action="{{ formAction }}">
+
+    {{ govukInput({
+      id: "title",
+      name: "title",
+      label: { text: "Task title" },
+      hint: { text: "Enter a short, descriptive title" },
+      classes: "govuk-!-width-two-thirds",
+      value: task.title or ""
+    }) }}
+
+    {{ govukTextarea({
+      id: "description",
+      name: "description",
+      label: { text: "Task description" },
+      hint: { text: "Provide more detail about this task" },
+      value: task.description or ""
+    }) }}
+
+    {{ govukSelect({
+      id: "status",
+      name: "status",
+      label: {
+        text: "Sort by"
+      },
+      items: [
+        {
+          value: "pending",
+          text: "Pending",
+          selected: task.status == "pending"
+        },
+        {
+          value: "in progress",
+          text: "In Progress",
+          selected: task.status == "in progress"
+        },
+        {
+          value: "completed",
+          text: "Completed",
+          selected: task.status == "completed"
+        }
+      ]
+    }) }}
+
+    {{ govukDateInput({
+      id: "dueDate",
+      namePrefix: "dueDate",
+      fieldset: { legend: { text: "Due date", classes: "govuk-fieldset__legend--s" } },
+      hint: { text: "For example, 23 08 2025" },
+      items: [
+        {
+          classes: "govuk-input--width-2",
+          name: "day",
+          value: task.dueDateParts.day or ""
+        },
+        {
+          classes: "govuk-input--width-2",
+          name: "month",
+          value: task.dueDateParts.month or ""
+        },
+        {
+          classes: "govuk-input--width-4",
+          name: "year",
+          value: task.dueDateParts.year or ""
+        }
+      ]
+    }) }}
+
+    {{ govukButton({ text: buttonText }) }}
+  </form>
+
+{% endblock %}
