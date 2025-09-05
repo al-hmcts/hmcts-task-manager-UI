@@ -1,4 +1,3 @@
-// src/main/api/BaseClient.ts
 import axios, { AxiosInstance } from 'axios';
 import { ApiError } from '../models/errors/ApiError';
 

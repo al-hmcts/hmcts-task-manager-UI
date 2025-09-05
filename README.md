@@ -1,7 +1,7 @@
 # HMCTS Task Manager
 
 This repository contains the frontend for the brand-new HMCTS Task management system.
-It leverages an Express BFF (Backend For Frontend) architecture, leveraging Nunjucks components to provide accessible and reusable UI components, interfacing with a Task API to manage CRUD operations.
+It leverages an Express BFF (Backend For Frontend) architecture with Nunjucks components to provide accessible and reusable UI components, interfacing with a Task API to manage CRUD operations.
 
 ---
 

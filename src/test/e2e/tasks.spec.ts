@@ -5,8 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 async function login(page: Page) {
-  console.log(`Logging in to ${process.env.TASK_FRONTEND}/`);
-  await page.goto(`${process.env.TASK_FRONTEND}/`);
+  await page.goto(`/`);
 
   const username = page.getByRole('textbox', { name: 'Username' });
   const password = page.getByRole('textbox', { name: 'Password' });
@@ -17,7 +16,7 @@ async function login(page: Page) {
 }
 
 test('Route to login page if not logged in', async ({ page }) => {
-  await page.goto(`${process.env.TASK_FRONTEND}/tasks`);
+  await page.goto(`/tasks`);
 
   const signInHeading = page.getByRole('heading', { name: 'Sign in' });
 
